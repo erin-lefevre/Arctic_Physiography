@@ -1,1 +1,14 @@
 /*Stylesheet by Erin J. LeFevre, 2020*/
+
+#mapid {
+    background-color: black;
+    height: 600px;
+    width: 900px;
+    margin: 0 auto;
+    border: solid 1px black;
+    
+#bgid {
+    background-color: white;
+        
+    }
+            
