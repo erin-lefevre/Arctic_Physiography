@@ -21,7 +21,7 @@ var powerplants = L.geoJSON(powerplants);
 powerplants.addTo(myMap);*/
 
 /* Method 2 reads powerplants.geojson directy*/
-$.getJSON('../data/powerplants.geojson', function(geojson) {
+$.getJSON('/data/powerplants.geojson', function(geojson) {
     L.geoJSON(geojson).addTo(myMap);
 });
         
