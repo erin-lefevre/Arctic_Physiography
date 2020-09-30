@@ -15,7 +15,7 @@ var myMap = L.map('mapid', {
 
 /*Background map tile layer*/
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: 'Map data &copy; <a href=https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
@@ -29,6 +29,7 @@ $.getJSON('data/powerplants.geojson')
 .done(function(data) {
     var info = processData(data);
     createPropSymbols(info.timestamps, data);
+    createSliderUI(info.timestamps);
 });
 
  /*process the data*/
@@ -82,8 +83,8 @@ function createPropSymbols(timestamps, data) {
             return L.circleMarker(latlng, {
                 fillColor: '#501e65',
                 color: '#501e65',
-                weight: 2,
-                fillOpacity: 0.5
+                weight: .25,
+                fillOpacity: .15
             
             }).on({
                 mouseover: function(e) {
@@ -92,7 +93,7 @@ function createPropSymbols(timestamps, data) {
                 },
                 mouseout: function(e) {
                      this.closePopup();
-                     this.setStyle({fillcolor: '#501e65'});
+                     this.setStyle({fillColor: '#501e65'});
             }
         });
     }
@@ -101,6 +102,7 @@ function createPropSymbols(timestamps, data) {
 updatePropSymbols(timestamps[0]);
 
 }
+
 
 /*Update and resize each circle marker*/
 
@@ -111,7 +113,10 @@ function updatePropSymbols (timestamp) {
      var props = layer.feature.properties;
      var radius = calcPropRadius(props[timestamp]);
      
-     var popupContent = 'Year:' + timestamp + '-' + props.Plant_Name + ':' + String(props[timestamp]) +':' +'MWH';
+     var popupContent = '<b>' + 'Year:' + '</b>' + ' ' + timestamp + '<br>'
+     
+     + '<b>' + 'Plant Name:' + '</b>' + ' ' + props.Plant_Name + '<br>'
+     + '<b>' + 'MWh:' + '</b>' + ' ' + String(props[timestamp]);
      
      
      layer.setRadius(radius);
@@ -120,7 +125,8 @@ function updatePropSymbols (timestamp) {
  });
 }
 
-/* Calculate the area of the proportional symbols*/
+/* Calculate the radius of the proportional symbols*/
+
 function calcPropRadius(attributeValue) {
     
     /*Adjust the scale factor as needed*/
@@ -131,10 +137,53 @@ function calcPropRadius(attributeValue) {
 }
 
 
+/*Temporal time slider content*/
 
-
-
+function createSliderUI(timestamps) {
+  var sliderControl = L.control({ position: 'bottomleft'} );
     
+    sliderControl.onAdd = function(map) {
+        var slider = L.DomUtil.create('input', 'range-slider');
+        L.DomEvent.addListener(slider, 'mousedown', function(e) {
+            L.DomEvent.stopPropagation(e);
+            map.dragging.disable(e);
+            map.dragging.enable(e)
+        });
+        
+            
+        var labels = ['2013', '2014', '2015', '2016', '2017', '2018', '2019'];
+        
+        $(slider)
+        .attr({
+            'type':'range',
+            'max': timestamps[timestamps.length-1],
+            'min':timestamps[0],
+            'step': 1,
+            'value': String(timestamps[0])
+        })
+        .on('input change', function() {
+            updatePropSymbols($(this).val().toString());
+            var i = $.inArray(this.value,timestamps);
+            $(".temporal-legend").text(labels[i]);
+        });
+        return slider;
+    }
+    sliderControl.addTo(myMap);
+    createTimeLabel('2013'); 
+  }
+    
+  /*add labels to the timeslider*/ 
+function createTimeLabel(startTimestamp) {
+    var temporalLegend = L.control({position: 'bottomleft' });
+    temporalLegend.onAdd = function(myMap) {
+        var output = L.DomUtil.create("output", "temporal-legend");
+        $(output).text(startTimestamp);
+        
+        return output;
+    }
+    temporalLegend.addTo(myMap);   
+
+}
 
 
 
