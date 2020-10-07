@@ -11,18 +11,21 @@ var myMap = L.map('mapid', {
     ],
     maxZoom: 14,
     minZoom: 1
+    
 });
 
 /*Background map tile layer*/
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href=https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+var basemap1 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckfydis0w05kc19mxjpxxwxmq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
+    
     maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZjRxejcwcTAxeTYyc24xc2Jma2tydHgifQ.I3e4gsE09RQuhbDiKyVlYg'
+    
 }).addTo(myMap);
 
+
+var basemap2 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ck83wdb6f1yyd1iq7wlpaciby/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
+            
+            maxZoom: 18
+        });
 
 /* powerplants.geojson directy*/
 $.getJSON('data/powerplants.geojson')
@@ -31,6 +34,39 @@ $.getJSON('data/powerplants.geojson')
     createPropSymbols(info.timestamps, data);
     createSliderUI(info.timestamps);
 });
+
+/* Feature to be added to layer control*/
+$.getJSON('data/urbanareas.geojson', function(urbanAreas) {
+    });
+
+/* Circle marker options for the boise point*/
+var markerOptions = {
+    color: 'red',
+    radius: 20,
+    weight: 2
+};
+
+/*variables for each feature*/
+var boise = L.circleMarker([43.62614, -116.32050], markerOptions);
+
+var urbanAreas = L.geoJSON(urbanAreas, {color: 'green'});
+
+var basemaps = {
+    "Light": basemap1,
+    "Dark": basemap2
+  };
+
+/*overlays*/
+var overlays = {
+    "Boise": boise,
+    "Urban Areas": urbanAreas
+  };
+/*layer control*/
+L.control.layers(basemaps, overlays, {
+    collapsed: false
+}).addTo(myMap);
+
+
 
  /*process the data*/
 function processData(data) {
@@ -81,19 +117,19 @@ function createPropSymbols(timestamps, data) {
         
         pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-                fillColor: '#501e65',
-                color: '#501e65',
-                weight: .25,
-                fillOpacity: .15
+                fillColor: '#eff782',
+                color: '#eff782',
+                weight: .2,
+                fillOpacity: .25
             
             }).on({
                 mouseover: function(e) {
                     this.openPopup();
-                    this.setStyle({fillColor: 'green'});
+                    this.setStyle({fillColor: 'eff782'});
                 },
                 mouseout: function(e) {
                      this.closePopup();
-                     this.setStyle({fillColor: '#501e65'});
+                     this.setStyle({fillColor: '#eff782'});
             }
         });
     }
@@ -182,6 +218,8 @@ function createTimeLabel(startTimestamp) {
         return output;
     }
     temporalLegend.addTo(myMap);   
+    
+
 
 }
 
