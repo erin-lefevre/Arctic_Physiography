@@ -1,28 +1,28 @@
-/*JavaScript by Erin J. LeFevre, 2020*/
+/*JavaScript - Erin J. LeFevre, 2020*/
 /* data processing/slider section based on the tutorial from neiugis.github.io/lab7*/
 
 var myMap = L.map('mapid', {
-    center: [41.172089, -98.379409],
-    zoom: 4,
-    /*zoomSnap: .5,*/
-    maxBounds: [
+    center: [38.815461, -98.368361],
+   zoom: 5,
+    
+    /*maxBounds: [
         [-20.715083, -136.026606],
         [55.718298, -50.013921]
-    ],
-    maxZoom: 14,
+    ],*/
+    maxZoom: 15,
     minZoom: 1
     
 });
 
 /*Background map tile layer*/
-var basemap1 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckfydis0w05kc19mxjpxxwxmq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
+var basemap1 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckg03iir70ezk19qrtlwbzwtu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
     
     maxZoom: 18,
     
 }).addTo(myMap);
 
 
-var basemap2 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ck83wdb6f1yyd1iq7wlpaciby/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
+var basemap2 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckg05kat80jec19lan4o72erl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
             
             maxZoom: 18
         });
@@ -52,8 +52,8 @@ var boise = L.circleMarker([43.62614, -116.32050], markerOptions);
 var urbanAreas = L.geoJSON(urbanAreas, {color: 'green'});
 
 var basemaps = {
-    "Light": basemap1,
-    "Dark": basemap2
+    "Dark": basemap1,
+    "Aerial": basemap2
   };
 
 /*overlays*/
@@ -119,8 +119,8 @@ function createPropSymbols(timestamps, data) {
             return L.circleMarker(latlng, {
                 fillColor: '#eff782',
                 color: '#eff782',
-                weight: .2,
-                fillOpacity: .25
+                weight: .25,
+                fillOpacity: .30
             
             }).on({
                 mouseover: function(e) {
