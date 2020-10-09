@@ -52,15 +52,14 @@ var boise = L.circleMarker([43.62614, -116.32050], markerOptions);
 var urbanAreas = L.geoJSON(urbanAreas, {color: 'green'});
 
 var basemaps = {
-    "Dark": basemap1,
-    "Aerial": basemap2
+    "Nuclear Earth": basemap1,
+    "Aerial Imagery": basemap2
   };
 
 /*overlays*/
-var overlays = {
-    "Boise": boise,
-    "Urban Areas": urbanAreas
+var overlays = {    
   };
+
 /*layer control*/
 L.control.layers(basemaps, overlays, {
     collapsed: false

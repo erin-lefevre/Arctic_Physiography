@@ -2,37 +2,35 @@
 
 #mapid {
     background-color: #000000;    
-    width: 100px;
-    height: 700px;
+    width: 650px;
+    height: 650px;
     min-height: 100%;
     min-width: 100%;
     display: block;
-    
-    html, body
-{
-    height: 100%;
-    background-color: #000000;
-    margin: : 100px;
+  
 }
-    
-#map-holder{
-height: 100%;
-background-color: black
-    }
-    
-    
- .fill
-{
-    min-height: 100%;
-    height: 100%;
-    width: 100%;
-    max-width: 100%;
-}  
-    
+ 
+#header {
+    background-color: #000000;    
+    width:500px;
+    height: 75px;
+	font-family: Georgia, serif;
+	font-size: 9;
+	color: #f9fbd0;    
+    display: block;
+	
+body {
+  background-color: #000000;
+	font-family: Georgia, "Times New Roman";
+}
+	
 
-    
-#bgid {
-    background-color: papayawhip;
-        
-    }
-            
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+  
+  margin: 0px;
+  padding: 0px;
+	}
