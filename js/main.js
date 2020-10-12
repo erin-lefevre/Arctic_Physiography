@@ -5,12 +5,12 @@ var myMap = L.map('mapid', {
     center: [38.815461, -98.368361],
    zoom: 5,
     
-    /*maxBounds: [
-        [-20.715083, -136.026606],
-        [55.718298, -50.013921]
-    ],*/
+    maxBounds: [
+        [20.227970, -136.789512],
+        [54.755261, -52.750122]
+    ],
     maxZoom: 15,
-    minZoom: 1
+    minZoom: 3
     
 });
 
@@ -207,7 +207,6 @@ function createTimeLabel(startTimestamp) {
     }
     temporalLegend.addTo(myMap);   
     
-
 
 }
 
