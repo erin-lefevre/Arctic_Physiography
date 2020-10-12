@@ -14,14 +14,14 @@ var myMap = L.map('mapid', {
     
 });
 
-/*Background map tile layer*/
+/*Background map tile layer 1*/
 var basemap1 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckg03iir70ezk19qrtlwbzwtu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
     
     maxZoom: 18,
     
 }).addTo(myMap);
 
-
+/*Background map tile layer 2*/
 var basemap2 = L.tileLayer('https://api.mapbox.com/styles/v1/erin-lefevre/ckg05kat80jec19lan4o72erl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpbi1sZWZldnJlIiwiYSI6ImNrZnljaWQ2eDBvd3gzM283eDdxaW03ZmwifQ.pUnzIpTy98k-H2VfbkPFkA', {
             
             maxZoom: 18
@@ -35,7 +35,6 @@ $.getJSON('data/powerplants.geojson')
     createSliderUI(info.timestamps);
 	
 });
-
 
 /*Layer control start*/
 var basemaps = {
@@ -51,6 +50,8 @@ L.control.layers(basemaps, overlays, {
 }).addTo(myMap);
 
 /* End of layer control*/
+
+
 
  /*process the data*/
 function processData(data) {
@@ -157,10 +158,7 @@ function calcPropRadius(attributeValue) {
 }
 
 
-/*Legend Function goes here*/
-
-
-
+/*Legend function could go here if necessary*/
 
 
 /*Temporal time slider content*/
