@@ -13,7 +13,7 @@
 #header {
     background-color: #000000;    
     width:500px;
-    height: 75px;
+    height: 70px;
 	font-family: Georgia, serif;
 	font-size: 9;
 	color: #f9fbd0;    
@@ -25,12 +25,33 @@ body {
 }
 	
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
 
-.title {
-  
-  margin: 0px;
-  padding: 0px;
+/* changes the background color of popups*/
+.leaflet-popup-tip {
+	background: #f9fbd0;
+	opacity: .75;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 	}
+/*changes font color on popups*/	
+.leaflet-popup-content {
+	margin: 13px 19px;
+	line-height: 1.4;
+	color: black;
+	}
+/*changes the background color*/	
+.leaflet-control-layers-expanded {
+	padding: 3px 3px 3px 3px;
+	color: #333;
+	background: #f9fbd0;
+	opacity: .75;
+	width: 150px;
+/*changes the background color of the zoom*/
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	background-color: #f9fbd0;
+	}
+	
+	
+	
+	

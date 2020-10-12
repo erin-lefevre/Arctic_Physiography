@@ -33,39 +33,24 @@ $.getJSON('data/powerplants.geojson')
     var info = processData(data);
     createPropSymbols(info.timestamps, data);
     createSliderUI(info.timestamps);
+	
 });
 
-/* Feature to be added to layer control*/
-$.getJSON('data/urbanareas.geojson', function(urbanAreas) {
-    });
 
-/* Circle marker options for the boise point*/
-var markerOptions = {
-    color: 'red',
-    radius: 20,
-    weight: 2
-};
-
-/*variables for each feature*/
-var boise = L.circleMarker([43.62614, -116.32050], markerOptions);
-
-var urbanAreas = L.geoJSON(urbanAreas, {color: 'green'});
-
+/*Layer control start*/
 var basemaps = {
     "Nuclear Earth": basemap1,
     "Aerial Imagery": basemap2
   };
 
-/*overlays*/
 var overlays = {    
   };
 
-/*layer control*/
 L.control.layers(basemaps, overlays, {
     collapsed: false
 }).addTo(myMap);
 
-
+/* End of layer control*/
 
  /*process the data*/
 function processData(data) {
@@ -170,6 +155,12 @@ function calcPropRadius(attributeValue) {
     
     return Math.sqrt(area/Math.PI);
 }
+
+
+/*Legend Function goes here*/
+
+
+
 
 
 /*Temporal time slider content*/
