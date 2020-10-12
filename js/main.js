@@ -32,7 +32,7 @@ $.getJSON('data/powerplants.geojson')
 .done(function(data) {
     var info = processData(data);
     createPropSymbols(info.timestamps, data);
-    createSliderUI(info.timestamps);
+    createSliderUI(info.timestamps);	
 	
 });
 
@@ -124,7 +124,6 @@ updatePropSymbols(timestamps[0]);
 
 }
 
-
 /*Update and resize each circle marker*/
 
 function updatePropSymbols (timestamp) {
@@ -157,10 +156,6 @@ function calcPropRadius(attributeValue) {
     return Math.sqrt(area/Math.PI);
 }
 
-
-/*Legend function could go here if necessary*/
-
-
 /*Temporal time slider content*/
 
 function createSliderUI(timestamps) {
@@ -188,7 +183,7 @@ function createSliderUI(timestamps) {
         .on('input change', function() {
             updatePropSymbols($(this).val().toString());
             var i = $.inArray(this.value,timestamps);
-            $(".temporal-legend").text(labels[i]);
+            $('.temporal-legend').text(labels[i]);
         });
         return slider;
     }
@@ -200,7 +195,7 @@ function createSliderUI(timestamps) {
 function createTimeLabel(startTimestamp) {
     var temporalLegend = L.control({position: 'bottomleft' });
     temporalLegend.onAdd = function(myMap) {
-        var output = L.DomUtil.create("output", "temporal-legend");
+        var output = L.DomUtil.create('output', 'temporal-legend');
         $(output).text(startTimestamp);
         
         return output;
