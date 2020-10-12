@@ -640,3 +640,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	margin-left: -12px;
 	border-right-color: #fff;
 	}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 24px;
+    border: none;
+    border-radius: 0%;
+    background: white;
+    cursor: pointer;
+}
